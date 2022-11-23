@@ -8,7 +8,7 @@ A winner is declared whenever one player places **three** of their marks in a *h
 
 The following example from [Wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe) shows how Player One (X) wins the game in seven steps:
 
-![A sample game of tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe#/media/File:Tic-tac-toe-game-1.svg)
+![A sample game of tic-tac-toe](https://upload.wikimedia.org/wikipedia/commons/1/1b/Tic-tac-toe-game-1.svg)
 
 This document will teach you how to play a game of Tic-Tac-Toe using the **pen and paper** method.
 
