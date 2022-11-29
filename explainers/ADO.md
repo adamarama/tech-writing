@@ -1,6 +1,6 @@
 # What is ADO?
 
-**ADO** stands for **A**ctiveX **D**ata **O**bjects. It is a programming model developed by Microsoft and provides an interface to OLE-DB. ADO allows C++ and Visual Basic programs to connect to the cloud-based Azure SQL Database, SQL Server, and other databases.
+**ADO** stands for **_A_**ctiveX **_D_**ata **_O_**bjects. It is a programming model developed by Microsoft and provides an interface to OLE-DB. ADO allows C++ and Visual Basic programs to connect to the cloud-based Azure SQL Database, SQL Server, and other databases.
 
 ADO has three primary objects:
 + *Connection* connects to a database management system (DBMS) or other data source and can send a query to the database.
