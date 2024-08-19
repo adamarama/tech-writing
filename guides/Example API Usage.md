@@ -1,4 +1,4 @@
-Since my prior technical writing roles were internal and do not publicly available documentation, this document serves as an example of how I might structure an API Usage document. 
+Since my prior technical writing roles were internal and do not have publicly available documentation, this document is an example of how I might structure an API Usage document. 
 
 ---
 
@@ -6,7 +6,9 @@ Since my prior technical writing roles were internal and do not publicly availab
 
 ## Overview
 
-This document provides a detailed guide on how to use the **Example API**. The Example API allows developers to interact with the server and extract the appropriate data. This guide covers the API's endpoints, request and response formats, authentication, error handling, and best practices.
+This document provides a detailed guide on how to use the **Example API**.
+
+The Example API allows developers to interact with the server and extract the appropriate data. This guide covers the Example API's endpoints, request and response formats, authentication, error handling, and best practices.
 
 ### Prerequisites
 
@@ -21,7 +23,7 @@ Before you begin, make sure you have the following:
 
 ### API Key Authentication
 
-To authenticate your requests, you'll need to include your API key in the request headers.
+To authenticate your requests, you must include your API key in the request headers.
 
 **Example Request:**
 
@@ -31,7 +33,7 @@ Host: api.example.com
 Authorization: Bearer YOUR_API_KEY
 ```
 
-Replace `YOUR_API_KEY` with the API key provided to you.
+Replace `YOUR_API_KEY` with the API key you were provided.
 
 **Header:**
 | Key           | Value          |
@@ -40,7 +42,7 @@ Replace `YOUR_API_KEY` with the API key provided to you.
 
 ### OAuth 2.0 Authentication
 
-For more secure applications, OAuth 2.0 is supported. You can obtain an access token by following these steps:
+For more secure applications, OAuth 2.0 is supported. OAuth 2.0 stands for "Open Authorization" and is a standard authorization protocol that allows a website or application to access resources hosted by other web applications on behalf of a user.  You can obtain an access token by following these steps:
 
 1. **Request Authorization Code:**
 
@@ -203,10 +205,10 @@ Content-Type: application/json
 
 ### Common Error Codes
 
-- **400 Bad Request:** The request sent by the client is invalid or incorrect, often due to missing required parameters.
-- **401 Unauthorized:** The client lacks the appropriate authentication credentials or the credentials provided are invalid.
+- **400 Bad Request:** The client's request is invalid or incorrect, often due to missing required parameters.
+- **401 Unauthorized:** The client lacks the appropriate authentication credentials, or the credentials provided are invalid.
 - **404 Not Found:** The specified resource could not be found on the server, possibly due to an incorrect or outdated URL.
-- **500 Internal Server Error:** A generic error message that indicates something unexpected occuring on the server side, often due to a server malfunction or programming error.
+- **500 Internal Server Error:** This is a generic error message that indicates something unexpected is occurring on the server side, often due to a server malfunction or programming error.
 
 **Example Error Response:**
 
@@ -221,7 +223,7 @@ Content-Type: application/json
 
 ### Handling Errors in Your Code
 
-To handle errors gracefully in your application, check the status code of the response before attempting to parse the body. If an error occurs, log the error message and take appropriate action.
+To handle errors gracefully in your application, check the response's status code before you try to parse the body. If an error occurs, log the error message and take appropriate action.
 
 ---
 
@@ -245,7 +247,7 @@ Visit [Example API Link] to register and obtain your API key.
 
 ### What are the rate limits?
 
-The default rate limit is 2000 requests per minute. If you exceed this limit, you will receive a 429 Too Many Requests response.
+The default rate limit is 2000 requests per minute. If you exceed this limit, you will receive a **429 Too Many Requests** response.
 
 ### How do I report bugs or request features?
 
@@ -255,4 +257,4 @@ Please use our issue tracker at [Example API Issue Tracker Link] or contact our 
 
 ## Conclusion
 
-This guide should provide you with all the necessary information to start using the Example API. If you have any questions or encounter any issues, feel free to reach out to our support team.
+This guide should provide all the necessary information to start using the Example API. If you have any questions or encounter any issues, feel free to reach out to our support team.
