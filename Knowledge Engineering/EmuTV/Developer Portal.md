@@ -1,16 +1,14 @@
-# EmuTV Engineering Portal
+# EmuTV Developer Portal
 **Version 1.0**
 **Owner:** Hector Adama
 
 **Last Updated:** June 2026
 
-*NOTE: EmuTV is a fictional streaming platform used as an example for this document.*
+*NOTE: EmuTV is a fictional streaming platform used as an example for this document. As this is a sample, it is not exhaustive and has been kept condensed for length, so some sections may appear to be missing steps.*
 
 ## Portal Home
 ### Platform overview
-EmuTV consists of nine business domains and more than fifty independently deployable services.
-
-The Engineering Portal helps engineers answer questions such as:
+EmuTV consists of nine business domains and more than fifty independently deployable services. The Developer Portal helps developers answer questions such as:
 
  - Which service owns this capability?
  - What APIs are available?
@@ -82,283 +80,308 @@ Platform Engineering
 ```
 
 ## Domain Directory
+### Purpose
+This section defines the different domains within EmuTV. Each domain owns its data, APIs, operational responsibilities, and lifecycle.
+
+|Criticality|Definition|
+|--|--|
+|Tier 1|Critical business impact|
+|Tier 2|Moderate business impact|
+|Tier 3|Minimal business impact| 
+
 ### Identity Domain
-Purpose:
+**Purpose:**
 Authentication, authorisation, and customer identity management.
 
-Owned by:
-Identity Platform Team
+**Owned by:**
+Identity Platform
 
-Key Services:
+**Key Services:**
 
  - Identity API
  - Session Service
  - Profile Service
  - Token Service
 
-Critical Events:
+**Critical Events:**
 
  - UserCreated
  - UserUpdated
  - UserDeleted
 
-Dependencies:
+**Dependencies:**
 
  - Billing
  - Recommendations
  - Playback
 
-Business Criticality:
+**Business Criticality:**
 Tier 1
 
 ### Catalog Domain
-Purpose:
+**Purpose:**
 Content metadata and discovery.
 
-Owned by:
-Content Platform Team
+**Owned by:**
+Content Platform
 
-Key Services:
+**Key Services:**
 
  - Catalog API
  - Metadata Service
  - Search Service
 
-Critical Events:
+**Critical Events:**
 
  - ContentCreated
  - ContentPublished
  - ContentArchived
 
-Dependencies:
+**Dependencies:**
 
  - Recommendations
  - Playback
  - Search
 
-Business Criticality:
+**Business Criticality:**
 Tier 1
 
 ### Playback Domain
-Purpose:
+**Purpose:**
 Video delivery and streaming authorisation.
 
-Owned by:
+**Owned by:**
 Playback Engineering
 
-Key Services:
+**Key Services:**
 
  - Playback API
  - Manifest Service
  - DRM Service
  - CDN Service
 
-Critical Events:
+**Critical Events:**
 
  - PlaybackStarted
  - PlaybackPaused
  - PlaybackCompleted
 
-Business Criticality:
+**Business Criticality:**
 Tier 1
 
 ### Recommendation Domain
-Purpose:
+**Purpose:**
 Personalised content discovery.
 
-Owned by:
+**Owned by:**
 Discovery Engineering
 
-Key Services:
+**Key Services:**
 
  - Recommendations Engine
  - Feature Service
  - Ranking Service
 
-Critical Events:
+**Critical Events:**
 
  - RecommendationGenerated
 
-Business Criticality:
+**Business Criticality:**
 Tier 2
 
 ## Service Catalog
+### Purpose
+The Service Catalog is a reference that clearly defines all internal and external services, including their purpose, owners,  and technology stack.
+
+|Support Tier|Definition|
+|--|--|
+|Tier 1|Critical issues requiring immediate action|
+|Tier 2|Issues should be considered Medium to High priority|
+|Tier 3|Issues should be considered Normal to Medium priority| 
+
 ### Identity API
-Service Type:
+**Service Type:**
 User-facing API
 
-Purpose:
+**Purpose:**
 Authenticate users and issue access tokens.
 
-Owned by:
+**Owned by:**
 Identity Platform Team
 
-Repository:
-identity-api
+**Repository:**
+`identity-api`
 
-Technology Stack:
+**Technology Stack:**
 
  - TypeScript
  - Node.js
  - PostgreSQL
  - Kubernetes
 
-Consumes Events:
+**Consumes Events:**
 
  - SubscriptionExpired
 
-Publishes Events:
+**Publishes Events:**
 
  - UserAuthenticated
 
-Dependencies:
+**Dependencies:**
 
  - Profile Service
  - Session Service
 
-Availability Target:
+**Uptime Availability Target:**
 99.95%
 
-Support Tier:
+**Support Tier:**
 Tier 1
 
 ### Catalog API
-Service Type:
+**Service Type:**
 User-facing API
 
-Purpose:
+**Purpose:**
 Provide content metadata.
 
-Owned by:
+**Owned by:**
 Content Platform Team
 
-Repository:
-content-api
+**Repository:**
+`content-api`
 
-Technology Stack:
+**Technology Stack:**
 
  - TypeScript
  - PostgreSQL
  - Elasticsearch
 
-Consumes Events:
+**Consumes Events:**
 
  - ContentPublished
 
-Publishes Events:
+**Publishes Events:**
 
  - MetadataUpdated
 
-Availability Target:
+**Uptime Availability Target:**
 99.95%
 
-Support Tier:
-
+**Support Tier:**
 Tier 1
 
 ### Recommendation Engine
-Service Type:
+**Service Type:**
 Internal Service
 
-Purpose:
+**Purpose:**
 Generate personalised recommendations.
 
-Owned by:
+**Owned by:**
 Discovery Engineering
 
-Technology Stack:
+**Technology Stack:**
 
  - Python
  - Feature Store
  - Redis
 
-Consumes Events:
+**Consumes Events:**
 
  - PlaybackCompleted
  - SearchPerformed
 
-Publishes Events:
+**Publishes Events:**
 
  - RecommendationsGenerated
 
-Availability Target:
+**Uptime Availability Target:**
 99.95%
 
-Support Tier:
+**Support Tier:**
 Tier 2
 
 ### Playback API
-Service Type:
+**Service Type:**
 User-facing API
 
-Purpose:
+**Purpose:**
 Authorise streaming sessions.
 
-Owned by:
+**Owned by:**
 Playback Engineering
 
-Technology Stack:
+**Technology Stack:**
 
  - Go
  - Redis
  - Kubernetes
 
-Consumes Events:
+**Consumes Events:**
 
  - SubscriptionActivated
  - SubscriptionExpired
 
-Publishes Events:
+**Publishes Events:**
 
  - PlaybackStarted
 
-Availability Target:
+**Uptime Availability Target:**
 99.99%
 
-Support Tier:
+**Support Tier:**
 Tier 1
 
+`NOTE: Due to critical impacts on business and revenue, issues related to the Playback API always take highest priority over other issues.`
+
 ## Event Catalog
+### Purpose
+The Event Catalog is a reference that clearly defines all events, including what domain owns and produces them, what domains consume them, and their purpose.
+
 ### UserCreated
-Producer:
+**Producer:**
 Identity Domain
 
-Consumers:
+**Consumers:**
 
  - Recommendations
  - Analytics
  - Billing
 
-Purpose:
+**Purpose:**
 Signals creation of a new user account.
 
 ### SubscriptionActivated
-Producer:
+**Producer:**
 Billing Domain
 
-Consumers:
+**Consumers:**
 
  - Playback
  - Advertising
  - Recommendations
 
-Purpose:
+**Purpose:**
 Signals activation of a user entitlement.
 
 ### PlaybackCompleted
-Producer:
+**Producer:**
 Playback Domain
 
-Consumers:
+**Consumers:**
 
  - Analytics
  - Recommendations
  - Advertising
 
-Purpose:
+**Purpose:**
 Signals successful completion of content playback.
 
 ## Dependency Maps
+### Purpose
+Dependency maps provide a visual representation that illustrates the different relationships between domains, services,  and other system components, making it easier to understand how the system architecture fits together at a high level.
+
 ### Playback Domain
 ```
 Playback API
@@ -379,9 +402,12 @@ Recommendation Engine
 └── User Profile Service
 ```
 
-## Engineering Standards
+## Development Standards
+### Purpose
+This section defines the formal guidelines defining how the EmuTV system is designed, documented, and scaled to ensure consistency, maintainability, and security standards across development teams. These standards establish a baseline for design, communication, and deployment.
+
 ### API Standards
-Requirements:
+**Requirements:**
 
  - OpenAPI specifications
  - Semantic versioning
@@ -389,7 +415,7 @@ Requirements:
  - Backward compatibility
 
 ### Event Standards
-Requirements:
+**Requirements:**
 
  - Event ownership
  - Event schemas
@@ -397,70 +423,9 @@ Requirements:
  - Consumer documentation
 
 ### Observability Standards
-Requirements:
+**Requirements:**
 
  - Structured logging
  - Distributed tracing
  - Service metrics
  - Service Level Objective (SLO) definitions
-
-## New Engineer Navigation Guide
-If you are trying to understand:
-
-Authentication
-→ Identity Domain
-
-Content Discovery
-→ Catalog + Recommendation Domains
-
-Video Playback
-→ Playback Domain
-
-Subscription Logic
-→ Billing Domain
-
-Advertising
-→ Advertising Domain
-
-Operational Infrastructure
-→ Platform Engineering Domain
-
-## AI Knowledge Structure
-Example Service Record
-```yaml
-service_id: playback-api
-
-domain: playback
-
-owner_team: playback-engineering
-
-purpose:
-Authorise and manage video playback sessions.
-
-dependencies:
-
- - identity-api
- - drm-service
- - entitlement-service
-
-published_events:
-
- - PlaybackStarted
- - PlaybackCompleted
-
-criticality:
-tier1
-
-runbooks:
-
- - playback-outage
- - drm-failure
-
-documentation:
-
- - architecture-narrative
- - onboarding-guide
- - api-reference
-
-status:
-production
