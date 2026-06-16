@@ -1,17 +1,16 @@
 # Technical Playbook: Investigating a Playback Failure
 **Version 1.0**
-**Audience:** Engineers, Site Reliability Engineers (SREs), Incident responders, Platform teams
+
+**Audience:** Developers, Site Reliability Engineers (SREs), Incident Responders, Platform Teams
 
 **Owner:** Hector Adama
 
 **Last Updated:** June 2026
 
-*NOTE: EmuTV is a fictional streaming platform used as an example for this document.*
+*NOTE: EmuTV is a fictional streaming platform used as an example for this document. As this is a sample, it is not exhaustive and has been kept condensed for length, so some sections may appear to be missing steps.*
 
 ## Purpose
-This playbook provides a structured approach for investigating playback failures within the EmuTV platform.
-
-The objective is not to provide exhaustive troubleshooting procedures for every failure mode. Instead, this guide helps engineers:
+This technical playbook provides a structured approach for investigating playback failures within the EmuTV platform. The objective is not to provide exhaustive troubleshooting procedures for every failure mode. Instead, this guide helps developers:
 
  - Identify likely failure domains
  - Reduce time-to-diagnosis
@@ -20,7 +19,7 @@ The objective is not to provide exhaustive troubleshooting procedures for every 
  - Restore service quickly
 
 ## Scope
-Use this playbook when users report:
+You should use this technical playbook when users report:
 
  - Videos fail to start
  - Playback sessions cannot be created
@@ -36,7 +35,8 @@ Do not use this playbook for:
  - Recommendation issues
 
 ## Understanding the Playback Path
-Before troubleshooting, understand the request path.
+Before troubleshooting, it is important to understand the request path as a failure anywhere on this path can prevent successful playback.
+
 ```mermaid
 flowchart TD
     A[User] --> B[Customer Application]
@@ -48,55 +48,60 @@ flowchart TD
     G --> H[CDN Gateway]
     H --> I[Video Delivery]
 ```
-A failure anywhere on this path can prevent successful playback.
 
 ## Incident Classification
-Describe the scope of the impact.
+Start by defining the scope of the impact. Consider the symptoms and the impact to business capabilities and end users in determining the severity of the incident.
 
 ### Severity Assessment
 #### SEV-1
-Symptoms:
+**Symptoms:**
 
  - Playback unavailable globally
  - All titles affected
  - Revenue-impacting outage
 
-Examples:
+**Examples:***
 
  - Playback API unavailable
  - CDN outage
  - Authentication failure preventing playback authorisation
 
-Immediate escalation is required.
+In the event of a SEV-1 incident, **immediate escalation is required**.
+
+<hr>
 
 #### SEV-2
-Symptoms:
+**Symptoms:**
 
  - Significant customer impact
  - Regional failures
  - Specific device ecosystems affected
 
-Examples:
+**Examples:**
 
  - Smart TV playback failures
  - Regional CDN routing issues
 
+<hr>
+
 #### SEV-3
-Symptoms:
+***Symptoms:**
 
  - Limited impact
  - Isolated title failures
  - Single workflow degradation
 
-Examples:
+**Examples:**
 
  - Incorrect content configuration
  - Metadata inconsistencies
 
 ## Initial Triage Checklist
-Before investigating specific systems, answer the following:
+Before investigating specific systems, you must follow a triage checklist. This checklist establishes a consisent and repeatable framework that will assist you in isolating root causes, reduce system downtime, and prevent critical issues from being overlooked.
 
-### What is failing?
+To begin, answer the following questions:
+
+### 1. What is failing?
 Can users:
 
  - open the application?
@@ -104,7 +109,7 @@ Can users:
  - select content?
  - start playback?
 
-### Who is affected?
+### 2. Who is affected?
 Determine:
 
  - Geographic region
@@ -118,7 +123,7 @@ Examples:
  - Only live content
  - Only premium subscribers
 
-### When did it start?
+### 3. When did it start?
 Identify:
 
  - Deployment timing
@@ -128,7 +133,9 @@ Identify:
 Correlate failures with recent changes whenever possible.
 
 ## Failure Isolation Workflow
-Never start with assumptions. Use the following sequence to begin working through the issue:
+A failure isolation workflow confines the scope of an incident to a specific area, ideally preventing it from cascading into a widespread outage. It acts as a targeted blueprint for troubleshooting and debugging, allowing you to convert vague system errors into actionable diagnoses for faster resolution.
+
+Never start with assumptions. Instead, use the following sequence to begin working through the issue:
 
 ### Step 1: Verify Identity Domain
 Playback depends on successful user authentication.
@@ -152,6 +159,8 @@ Indicators:
  - Expired session anomalies
 
 If authentication fails, stop. Playback investigation should shift to the Identity Platform team instead.
+
+<hr>
 
 ### Step 2: Verify Entitlement Validation
 Users must possess valid viewing entitlements to stream video content.
@@ -177,6 +186,8 @@ Indicators:
 
 If entitlement validation fails, escalate to the Billing Engineering team.
 
+<hr>
+
 ### Step 3: Verify Playback API
 The Playback API must be healthy and available to create playback sessions.
  
@@ -195,7 +206,7 @@ Indicators:
  - Playback never starts.
  - Session creation fails.
 
-If you verify a problem with the Playback API, it must be escalated to a Critical issue and further investigation must begin immediately.
+**NOTE: If you verify a problem with the Playback API, it must be escalated to a Critical issue and further investigation must begin immediately.**
 
 Key Metrics:
 
@@ -203,6 +214,8 @@ Key Metrics:
  - Error rate
  - Latency
  - Availability
+
+<hr>
  
 ### Step 4: Verify DRM Service
 The Digital Rights Management (DRM) Service protects licensed content.
@@ -225,6 +238,8 @@ Examples:
 
 These patterns often indicate DRM issues.
 
+<hr>
+
 ### Step 5: Verify Manifest Generation
 The Manifest Service generates streaming manifests.
 
@@ -244,6 +259,8 @@ Check:
  - Manifest generation logs
  - Playback session records
  - URL signing workflows
+
+<hr>
 
 ### Step 6: Verify CDN Delivery
 Most video traffic bypasses core application services.
@@ -267,7 +284,7 @@ Check:
  - Regional availability reports
 
 ## Event Validation
-The platform uses event-driven communication to pass information between domains.
+When troubleshooting an incident, event validation can help you pinpoint the exact source of corrupted data, preventing bad inputs from crashing services downstream, and significantly reducing debugging time.
 
 Relevant Events:
 
@@ -282,7 +299,9 @@ Verify:
  - Lag remains within acceptable values
 
 ## Dependency Analysis
-The Playback Domain depends on:
+A dependency analysis maps out how code and services interact within an application. When there is a system failure, this analysis critically reduces downtime, prevents cascading issues, and allows you to isolate the root cause more quickly. 
+
+Keep in mind that failure in any dependency can appear as a playback problem. Avoid treating playback failures as isolated playback issues and always investigate dependencies.
 ```
 Playback API
 |
@@ -292,84 +311,8 @@ Playback API
 └── CDN Gateway
 ```
 
-Failure in any dependency can appear as a playback problem.
-
-Avoid treating playback failures as isolated playback issues.
-
-Always investigate dependencies.
-
-## Common Failure Patterns
-### Pattern 1: Authentication Failure
-Symptoms:
-
- - Users cannot start playback
- - Authorisation errors increase
-
-Likely Cause:
-Identity Domain degradation
-
-Owner:
-Identity Platform Team
-
-### Pattern 2: Subscription Recognition Failure
-Symptoms:
-
- - Active subscribers denied access
-
-Likely Cause:
-Billing entitlement issue
-
-Owner:
-Billing Engineering Team
-
-### Pattern 3: DRM Failure
-Symptoms:
-
- - Playback starts but immediately fails
- - Device-specific impacts
-
-Likely Cause:
-DRM license validation
-
-Owner:
-Playback Engineering Team
-
-### Pattern 4: CDN Failure
-Symptoms:
-
- - Regional playback issues
- - High buffering rates
-
-Likely Cause:
-Edge delivery problem
-
-Owner:
-Playback Engineering Team
-
-### Pattern 5: Manifest Generation Failure
-Symptoms:
-
- - Infinite loading indicators
- - Playback initialisation failures
-
-Likely Cause:
-Manifest Service degradation
-
-Owner:
-Playback Engineering Team
-
-## Escalation Matrix
-|System|Primary Team|
-|--|--|
-|Identity API|Identity Platform|
-|Billing Events|Billing Engineering|
-|Playback API|Playback Engineering|
-|DRM Service|Playback Engineering|
-|CDN Gateway|Playback Engineering|
-|Analytics Pipeline|Analytics Engineering|
-
 ## Communications Guidance
-When reporting findings, it is important to be as clear and detailed as possible.
+When reporting findings, it is important to be as thorough, clear, and detailed as possible. Poorly communicating your findings can cause delays in incident response.
 
 Avoid saying:
 >"Playback is broken."
@@ -383,9 +326,11 @@ This clearly communicates:
  - Evidence
  - Suspected root cause
 
-Poorly communicating your findings can cause delays in incident response.
-
 ## Post-Incident Activities
+Keeping a consistent and regularly updated record of all incidents, details, findings, and resolutions is crucial to the overall health of the platform. It will make it easier to identify and resolve problems in the future, especially if a problem is recurring and may indicate larger problems. 
+
+Knowledge should continually evolve alongside the platform and documentation should be seen as an essential part of the process.
+
 After resolving an issue:
 
 ### Capture the Timeline
@@ -396,7 +341,7 @@ You must document:
  - Mitigation
  - Resolution
 
-Keeping a consistent and regularly updated record of all incidents, details, findings, and resolutions is important. It will make it easier to identify and resolve problems in the future, especially if a problem is recurring and may indicate larger problems.
+<hr>
 
 ### Update Runbooks
 If new information was discovered:
@@ -405,15 +350,17 @@ If new information was discovered:
  - Update dependency maps
  - Update known failure modes
 
+<hr>
+
 ### Update Knowledge Assets
 Review:
 
  - Architecture Narrative
- - Engineering Portal
+ - Developer Portal
  - Service Catalog
  - Related Runbooks
 
-Knowledge should continually evolve alongside the platform and documentation should be seen as an essential part of the process.
+<hr>
 
 ## Quick Reference
 Playback Troubleshooting Sequence
@@ -426,8 +373,6 @@ Playback Troubleshooting Sequence
  6. CDN Delivery
  7. Event Validation
 
-Remember, most playback incidents are often dependency failures rather than playback failures themselves.
-
-Always investigate upstream dependencies before assuming the Playback Domain is the root cause.
+Remember: most playback incidents are often dependency failures rather than playback failures themselves. Always investigate upstream dependencies before assuming the Playback Domain is the root cause.
 
 Understanding relationships between systems is the fastest path to identifying the actual source of failure.
