@@ -6,7 +6,7 @@
 
 **Last Updated:** June 2026
 
-*NOTE: EmuTV is a fictional streaming platform used as an example for this document.**
+*NOTE: EmuTV is a fictional streaming platform used as an example for this document.*
 
 ## 1. Purpose
 This document is intended to provide a narrative overview of the EmuTV platform architecture.
