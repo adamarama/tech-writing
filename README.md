@@ -27,8 +27,8 @@ I have a background in software development, technical communication, and data a
 
 ## Contact
 
-hryouadama@gmail.com
-linkedin.com/in/hryouadama
+* hryouadama@gmail.com
+* linkedin.com/in/hryouadama
 
 <hr>
 
