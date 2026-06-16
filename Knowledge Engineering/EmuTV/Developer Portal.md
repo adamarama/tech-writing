@@ -118,6 +118,8 @@ Identity Platform
 **Business Criticality:**
 Tier 1
 
+<hr>
+
 ### Catalog Domain
 **Purpose:**
 Content metadata and discovery.
@@ -146,6 +148,8 @@ Content Platform
 **Business Criticality:**
 Tier 1
 
+<hr>
+
 ### Playback Domain
 **Purpose:**
 Video delivery and streaming authorisation.
@@ -168,6 +172,8 @@ Playback Engineering
 
 **Business Criticality:**
 Tier 1
+
+<hr>
 
 ### Recommendation Domain
 **Purpose:**
@@ -238,6 +244,8 @@ Identity Platform Team
 **Support Tier:**
 Tier 1
 
+<hr>
+
 ### Catalog API
 **Service Type:**
 User-facing API
@@ -271,6 +279,8 @@ Content Platform Team
 **Support Tier:**
 Tier 1
 
+<hr>
+
 ### Recommendation Engine
 **Service Type:**
 Internal Service
@@ -301,6 +311,8 @@ Discovery Engineering
 
 **Support Tier:**
 Tier 2
+
+<hr>
 
 ### Playback API
 **Service Type:**
@@ -365,6 +377,8 @@ Billing Domain
 **Purpose:**
 Signals activation of a user entitlement.
 
+<hr>
+
 ### PlaybackCompleted
 **Producer:**
 Playback Domain
@@ -413,6 +427,7 @@ This section defines the formal guidelines defining how the EmuTV system is desi
  - Semantic versioning
  - Contract testing
  - Backward compatibility
+<hr>
 
 ### Event Standards
 **Requirements:**
@@ -421,6 +436,8 @@ This section defines the formal guidelines defining how the EmuTV system is desi
  - Event schemas
  - Versioned contracts
  - Consumer documentation
+
+<hr>
 
 ### Observability Standards
 **Requirements:**
