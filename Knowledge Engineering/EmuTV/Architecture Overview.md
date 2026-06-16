@@ -1,7 +1,10 @@
 # EmuTV Architecture Overview
 **Version 1.0**
+
 **Audience:** Developers, Platform Teams, Product Managers, Technical Leadership
+
 **Document Type:** Architecture Overview
+
 **Owner:** Hector Adama
 
 **Last Updated:** June 2026
