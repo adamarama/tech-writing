@@ -25,6 +25,11 @@ You can also view some of my user-facing work:
 
 I have a background in software development, technical communication, and data analysis with a strong interest in helping organisations translate complex technical information into user-friendly knowledge-based content. I enjoy the supportive role that technical writing enables me to take in supporting developers and improving user experiences.
 
+## Contact
+
+hryouadama@gmail.com
+linkedin.com/in/hryouadama
+
 <hr>
 
 *All systems, organisations, and products represented in this repository are fictional unless otherwise stated. Portfolio examples are intended to demonstrate technical writing and knowledge engineering practices.*
