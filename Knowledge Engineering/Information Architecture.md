@@ -18,6 +18,7 @@ EmuTV's information architecture must support:
  1. **Fast content discovery**
 	 - Users should find something to watch within seconds
 	 - Search, browse, recommendations, and editorial surfaces must work together
+	 
  2. **Multiple content types**
 	 - Movies
 	 - Series
@@ -29,12 +30,16 @@ EmuTV's information architecture must support:
 	 - Collections
 	 - Franchises
 	 - Continue Watching items
+	 
 3. **Personalisation at scale**
 	- Home pages, rails, recommendations, and search ranking should adapt to user behaviour, subscription tier, language, region, age profile, and device.
+	
 4. **Editorial flexibility**
-	- Content programmers must be able to create seasonal hubs, campaign pages, sports destinations, franchise collections, and promotional rails without engineering intervention
+	- Content programmers must be able to create seasonal hubs, campaign pages, sports destinations, franchise collections, and promotional rails without engineering intervention.
+	
 5. **Metadata consistency**
 	- Content must be structured with a reusable taxonomy, controlled vocabulary, localisation rules, rights windows, and availabiilty logic.
+	
 6. **AI and agent-friendly structure**
 	- Content knowledge should be represented in predictable, machine-readable ways to support internal AI search, metadata enrichment, content QA, support agents, and developer tooling.
 
@@ -54,6 +59,8 @@ EmuTV's information architecture must support:
  - Knowledge graph approach
  - Growth and scalability considerations
 
+<hr>
+
 ### Out of Scope
 - Full backend system design
 - CDN architecture
@@ -63,6 +70,7 @@ EmuTV's information architecture must support:
 - Payment processing architecture
 
 ## 4. Core User Groups
+
 |Viewer Persona|Expected Behaviour|
 |--|--|
 |Casual Viewer|Wants quick access to trending movies, popular shows, and recognisable brands.|
@@ -71,6 +79,7 @@ EmuTV's information architecture must support:
 |News Viewer|Needs live news, short clips, topic pages, breaking coverage, and local/regional news.|
 |Family Viewer|Needs kids-safe navigation, age filtering, parental controls, recognisable characters, and low-friction playback.|
 |Franchise Fan|Browses by universe, series, character, genre, release order, or recommended viewing path.|
+
 
 ## 5. Top Level Navigation
 The primary navigation should prioritise user mental models over internal organisational structures while taking business priorities into consideration. Top level navigation dictates how users find information, perceive the platform's purpose, and build spatial orientation. 
@@ -89,6 +98,7 @@ flowchart TD
 	A --> K[Account]
 ```
 #### Navigation Principles
+
  - **Home** is personalised and editorially programmable.
  - **TV Shows** and **Movies** are stable catalog destinations.
  - **Sports**, **News**, and **Live** require time sensitive IA.
@@ -143,6 +153,8 @@ Examples:
  - Trailer
  - Bonus clip
 
+<hr>
+
 #### Genre
 Defines creative category.
 
@@ -158,6 +170,8 @@ Examples:
  - Late Night
  - Sports Talk
 
+<hr>
+
 #### Audience
 Defines intended viewer group.
 
@@ -170,6 +184,8 @@ Examples:
  - Teen
  - Family
  - Mature
+
+<hr>
 
 #### Brand
 Groups content by recognisable business or entertainment label.
@@ -184,6 +200,8 @@ Examples:
  - Reality brand
  - Comedy brand
 
+<hr>
+
 #### Franchise
 Connects related titles across formats.
 
@@ -194,6 +212,8 @@ Examples:
  - A reality TV franchise
  - A sports league
  - A news program family
+
+<hr>
 
 #### Editorial Collection
 A human-curated grouping.
@@ -238,6 +258,8 @@ Examples:
 -   News program
 -   Franchise entry
 
+<hr>
+
 #### Asset
 
 The playable media file or stream.
@@ -252,17 +274,21 @@ Examples:
 -   Replay
 -   Highlight
 
+<hr>
+
 #### Collection
 
 A curated or algorithmic grouping of content.
 
 Examples:
 
--   “Because You Watched”
--   “Popular Movies”
--   “Watch the Franchise in Order”
--   “Live Now”
--   “New Episodes”
+-   "Because You Watched"
+-   "Popular Movies"
+-   "Watch the Franchise in Order"
+-   "Live Now"
+-   "New Episodes"
+
+<hr>
 
 #### Availability Window
 
@@ -279,9 +305,13 @@ Fields:
 -   Device restrictions
 -   Sports blackout rules
 
+<hr>
+
 #### Person
 
 Actors directors, hosts, commentators, athletes, journalists, and creators.
+
+<hr>
 
 #### Organization
 
@@ -305,6 +335,7 @@ A metadata model is a structured framework that defines the "data about data" wi
 |Safety|Rating, advisories, kids eligibility|
 |Discovery|Search keywords, related titles, franchise links|
 |Personalization|Similarity vectors, popularity signals, completion rates|
+
 
 ## 9. Search IA
 A search system is the design of interface components, search algorithms, and metadata schemas that allow users to query a system and find specific content. In good system design, it is one of the foundational systems co-designed alongside navigation, labeling, and organisation. EmuTV's search should support both explicit lookup and exploratory discovery.
@@ -405,6 +436,8 @@ As the catalog expands, EmuTV should move from manually managed tags to a hybrid
 -   Knowledge graph relationship inference
 -   Editorial override controls
 
+<hr>
+
 ### Regional Expansion
 
 The IA must support:
@@ -416,6 +449,8 @@ The IA must support:
 -   Multiple currencies and plans
 -   Regional sports rights
 -   Local news hubs
+
+<hr>
 
 ### Live Event Scaling
 
@@ -429,6 +464,8 @@ Live sports events and breaking news coverage can introduce traffic spikes. IA s
 -   Highlight generation
 -   Event archive rules
 
+<hr>
+
 ### Personalisation Scaling
 
 Personalisation should mature in phases:
@@ -440,11 +477,15 @@ Personalisation should mature in phases:
 5.  Context-aware personalization
 6.  Multi-profile household intelligence
 
+<hr>
+
 ## 13. Areas for Improvement and Growth
 
 ### 1. Build a Unified Content Knowledge Graph
 
 A graph model would improve search, recommendations, rights reasoning, franchise browsing, and AI-assisted support.
+
+<hr>
 
 ### 2. Improve Semantic Search
 
@@ -456,6 +497,8 @@ Examples:
 -   "soccer games this weekend"
 -   "movies for family night"
 -   "short true crime episodes"
+
+<hr>
 
 ### 3. Add Franchise-Aware Navigation
 
@@ -469,9 +512,13 @@ Recommended additions:
 -   Timeline views
 -   Related spin-off modules
 
+<hr>
+
 ### 4. Strengthen Live-to-VOD Transitions
 
 Live events should automatically become replay, clip, and highlight destinations.
+
+<hr>
 
 ### 5. Improve Metadata Observability
 
@@ -484,6 +531,8 @@ Create dashboards for:
 -   Search zero-result queries
 -   Low-performing collections
 -   Content with poor recommendation coverage
+
+<hr>
 
 ### 6. Support Agent-Friendly Internal Documentation
 
@@ -500,6 +549,8 @@ Recommended structure:
 -   Common failure modes
 -   Decision records
 -   Glossary
+
+<hr>
 
 ### 7. Create an IA Governance Program
 
